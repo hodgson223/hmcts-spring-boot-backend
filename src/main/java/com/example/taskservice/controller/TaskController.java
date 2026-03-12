@@ -4,6 +4,7 @@ import com.example.taskservice.model.Task;
 import com.example.taskservice.service.TaskService;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.List;
 
 @RestController
@@ -27,8 +28,9 @@ public class TaskController {
         return taskService.createTask(task);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteTask(@PathVariable Long id) {
-        taskService.deleteTask(id);
+   @DeleteMapping("/{id}")
+    public void deleteTask(@PathVariable("id") Long id) {
+    taskService.deleteTask(id);
     }
+
 }

@@ -2,7 +2,9 @@ package com.example.taskservice.service;
 
 import com.example.taskservice.model.Task;
 import com.example.taskservice.repository.TaskRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -24,9 +26,9 @@ public class TaskService {
     }
 
     public void deleteTask(Long id) {
-    taskRepository.deleteById(id);
-}
-
-
-    
+        if (!taskRepository.existsById(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not found");
+        }
+        taskRepository.deleteById(id);
+    }
 }
